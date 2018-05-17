@@ -61,4 +61,12 @@ public class BookService {
         }
         bookService.close();
     }
+
+    public void add(Book book){
+        if(book != null){
+            em.getTransaction().begin();
+            em.merge(book);
+            em.getTransaction().commit();
+        }
+    }
 }

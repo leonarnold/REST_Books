@@ -35,15 +35,15 @@ public class CityService {
         return typedQuery.getResultList();
     }
 
-    public List<City> getCityStart(int start){
-        TypedQuery<City> typedQuery = em.createQuery("SELECT b from City b where City.id > "+start+"", City.class);
+    public List<City> getCityStart(int start) {
+        TypedQuery<City> typedQuery = em.createQuery("SELECT b from City b where b.id > " + String.valueOf(start)+"" , City.class);
         return typedQuery.getResultList();
     }
 
 
-    public City deleteCity(int id){
+    public City deleteCity(int id) {
         City city = getCity(id);
-        if(city != null){
+        if (city != null) {
             em.getTransaction().begin();
             em.remove(city);
             em.getTransaction().commit();

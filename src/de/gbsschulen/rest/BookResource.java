@@ -53,4 +53,13 @@ public class BookResource {
     }
 
     // localhost:8080/rest/bookstore/book?id=7
+
+    @PUT
+    @Path("/createBook")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void putBook(Book book){
+        bookService.add(book);
+        System.out.println(book);
+
+    }
 }

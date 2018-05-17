@@ -1,45 +1,55 @@
 package de.gbsschulen.rest.world;
 
+
+import com.sun.org.apache.xpath.internal.SourceTree;
+
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
 
-@Path("/citystore")
-public class CityResource {
+@Path("/world")
+public class Cityresource {
 
     private CityService cityService = new CityService();
 
+    // http://localhost:8080/rest/bookstore/3
+
     @GET
-    @Path("/blub/{id}")
+    @Path("{ID}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public City getCity(@PathParam("id")int id){
+    public City getCity(@PathParam("ID") int id){
         City city = cityService.getCity(id);
         return city;
     }
 
     @GET
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public List<City> getAllCities(){
+    public List<City> getAllBooks(){
         return cityService.getAllCities();
     }
 
-//    @GET
-//    @Path("{start}")
-//    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-//    public List<City> getCitiyStart(@PathParam("start") int start){
-//        return cityService.getCityStart(start);
-//    }
-
     @DELETE
     @Produces(MediaType.TEXT_PLAIN)
-    @Path("{id}")
-    public String deleteCity(@PathParam("id") int id){
+    @Path("{ID}")
+    public String deleteBook(@PathParam("ID") int id){
         City city = cityService.deleteCity(id);
-        if(city != null){
+        if (city != null){
             return city.getName() + " wurde aus DB gelöscht";
         }
-        return "nicht gelöscht!";
+        return " nicht gelöscht";
     }
+
+
+    // localhost:8080/rest/bookstore/book?id=2
+
+    @GET
+    @Produces(MediaType.APPLICATION_XML)
+    @Path("/city/")
+    public City gibCity(@QueryParam("ID") int id){
+        City city = cityService.getCity(id);
+        return city;
+    }
+
 
 
 }
